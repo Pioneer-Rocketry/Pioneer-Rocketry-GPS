@@ -1,12 +1,10 @@
 #include "Arduino.h"
-#include "HardwareSerial.h"
+//#include "HardwareSerial.h"
 #include "GPS.h"
 
 void GPS::Initialize()
 {
 	usingInterrupt = false;
-
-	Serial.begin(115200);
 	gps.begin(9600);
 	mySerial.begin(9600);
 	// uncomment this line to turn on RMC (recommended minimum) and GGA (fix data) including altitude
@@ -37,11 +35,13 @@ void GPS::Initialize()
 	delay(1000);
 	// Ask for firmware version
 	mySerial.println(PMTK_Q_RELEASE);
+}
 
-#ifdef __AVR__
+/*#ifdef __AVR__
 	// Interrupt is called once a millisecond, looks for any new GPS data, and stores it
-	SIGNAL(TIMER0_COMPA_vect) {
-		char c = GPS.read();
+	SIGNAL(TIMER0_COMPA_vect) 
+	{
+		char c = gps.read();
 		// if you want to debug, this is a good time to do it!
 #ifdef UDR0
 		if (GPSECHO)
@@ -51,28 +51,33 @@ void GPS::Initialize()
 #endif
 	}
 
-	void useInterrupt(boolean v) {
-		if (v) {
+	void useInterrupt(boolean v) 
+	{
+		if (v) 
+		{
 			// Timer0 is already used for millis() - we'll just interrupt somewhere
 			// in the middle and call the "Compare A" function above
 			OCR0A = 0xAF;
 			TIMSK0 |= _BV(OCIE0A);
 			usingInterrupt = true;
-		} else {
+		} 
+		else 
+		{
 			// do not call the interrupt function COMPA anymore
 			TIMSK0 &= ~_BV(OCIE0A);
 			usingInterrupt = false;
 		}
 	}
-#endif //#ifdef__AVR__
-}
+#endif //#ifdef__AVR__*/
+
 
 void GPS::Update()
 {
 	timer = millis();
 	// in case you are not using the interrupt above, you'll
 	// need to 'hand query' the GPS, not suggested :(
-	if (! usingInterrupt) {
+	if (! usingInterrupt) 
+	{
 		// read data from the GPS in the 'main loop'
 		char c = gps.read();
 		// if you want to debug, this is a good time to do it!
@@ -81,7 +86,8 @@ void GPS::Update()
 	}
 
 	// if a sentence is received, we can check the checksum, parse it...
-	if (gps.newNMEAreceived()) {
+	if (gps.newNMEAreceived()) 
+	{
 		// a tricky thing here is if we print the NMEA sentence, or data
 		// we end up not listening and catching other sentences! 
 		// so be very wary if using OUTPUT_ALLDATA and trytng to print out data
@@ -95,7 +101,8 @@ void GPS::Update()
 	if (timer > millis())  timer = millis();
 
 	// approximately every 2 seconds or so, print out the current stats
-	if (millis() - timer > 2000) { 
+	if (millis() - timer > 2000) 
+	{ 
 		timer = millis(); // reset the timer
 
 		hour = gps.hour;
@@ -107,7 +114,7 @@ void GPS::Update()
 		year = gps.year;
 		fix = (int)gps.fix;
 		quality = (int)gps.fixquality;
-		
+
 		if (gps.fix) 
 		{
 			lat = gps.latitude;

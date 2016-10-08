@@ -1,15 +1,16 @@
 #ifndef _GPS_H
 #define _GPS_H
 
-#include <Arduino.h>
-#include <C:\Program Files (x86)\Arduino\libraries\Adafruit_GPS\Adafruit_GPS.h>
+#include "Arduino.h"
+#include "C:\Program Files (x86)\Arduino\libraries\Adafruit_GPS\Adafruit_GPS.h"
+//#include "HardwareSerial.h"
+#include "SoftwareSerial.h"
 #define mySerial Serial1
 #define GPSECHO  true
 
-typedef unsigned int uint32_t;
-
+/*typedef unsigned int uint32_t;
 typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
+typedef unsigned short uint16_t;*/
 
 class GPS
 {
@@ -20,9 +21,10 @@ public:
 	void getStats(int& _fix, int& _quality, float& _speed, float& _angle, float& _altitude, uint8_t& _sat);
 	void GetCoordinates(float& latitude, float& longitude);
 private:
+	SoftwareSerial Serial1;
 	boolean usingInterrupt;
 	void useInterrupt(boolean);
-	Adafruit_GPS gps;
+	Adafruit_GPS gps /*(&mySerial)*/;
 	float lat;
 	float lon;
 	uint32_t timer;

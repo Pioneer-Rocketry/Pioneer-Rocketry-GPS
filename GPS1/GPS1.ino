@@ -4,15 +4,20 @@
  Author:	TH3N3WD4WN
 */
 
-#include "HardwareSerial.h"
+//#include "Arduino.h"
+#include <SoftwareSerial.h>
+//#include "GPS.h"
 
+//GPS gps;
 
 // the setup function runs once when you press reset or power the board
-void setup() {
-
+void setup() 
+{
+//  gps.Initialize();
 }
 
 // the loop function runs over and over again until power down or reset
-void loop() {
-  
+void loop() 
+{
+//  gps.Update();
 }
