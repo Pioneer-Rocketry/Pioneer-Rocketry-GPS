@@ -17,8 +17,8 @@ class GPS
 public:
 	void Initialize();
 	void Update();
-	void getTime(uint8_t& _day, uint8_t& _month, uint8_t& _year, uint8_t& _hour, uint8_t& _minute, uint8_t& _second, uint16_t& millisecond);
-	void getStats(int& _fix, int& _quality, float& _speed, float& _angle, float& _altitude, uint8_t& _sat);
+	void GetTime(uint8_t& _day, uint8_t& _month, uint8_t& _year, uint8_t& _hour, uint8_t& _minute, uint8_t& _second, uint16_t& millisecond);
+	void GetStats(int& _fix, int& _quality, float& _speed, float& _angle, float& _altitude, uint8_t& _sat);
 	void GetCoordinates(float& latitude, float& longitude);
 private:
 	SoftwareSerial Serial1;

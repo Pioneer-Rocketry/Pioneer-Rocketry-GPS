@@ -127,7 +127,7 @@ void GPS::Update()
 	}
 }
 
-void GPS::getTime(uint8_t& _day, uint8_t& _month, uint8_t& _year, uint8_t& _hour, uint8_t& _minute, uint8_t& _second, uint16_t& _millisecond)
+void GPS::GetTime(uint8_t& _day, uint8_t& _month, uint8_t& _year, uint8_t& _hour, uint8_t& _minute, uint8_t& _second, uint16_t& _millisecond)
 {
 	_day = day;
 	_month = month;
@@ -138,7 +138,7 @@ void GPS::getTime(uint8_t& _day, uint8_t& _month, uint8_t& _year, uint8_t& _hour
 	_millisecond = millisecond;
 }
 
-void GPS::getStats(int& _fix, int& _quality, float& _speed, float& _angle, float& _alt, uint8_t& _sat)
+void GPS::GetStats(int& _fix, int& _quality, float& _speed, float& _angle, float& _alt, uint8_t& _sat)
 {
 	_fix = fix;
 	_quality = quality;
